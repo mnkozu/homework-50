@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+    <title>Document</title>
+    <style>
+        .main-block {
+            display: flex;
+        }
+        .sidebar {
+            flex-basis: 20%;
+            background: antiquewhite;
+            text-transform: capitalize;
+        }
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #198754;
+        }
+        .content {
+            min-height: calc(100vh - 100px);
+            flex-basis: 78%
+        }
+        .now-block,
+        .online-block {
+            display: flex;
+            flex-direction: row;
+        }
+        footer {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+       const Header = props => {
+          return (
+             <header className="bg-success">
+                <div className="container d-flex justify-content-between p-3">
+                   <a href={props.homeLink} className="d-inline-block p-1">
+                      <img src={props.logoIMG} alt="logo" width="40px"/>
+                   </a>
+                   <div className="btn-group" role="group" aria-label="Basic outlined example">
+                      <a href={props.homeLink} type="button" className="btn btn-outline-light">{props.login}</a>
+                      <a href={props.homeLink} type="button" className="btn btn-outline-light">{props.signUp}</a>
+                   </div>
+                </div>
+             </header>
+          );
+       };
+
+       const Sidebar = props => {
+          return (
+             <nav className="sidebar navbar bg-light">
+                <div className="container-fluid">
+                   <a className="navbar-brand" href="#">{props.home}</a>
+                </div>
+                <div className="container-fluid">
+                   <a className="navbar-brand" href="#">{props.dashboard}</a>
+                </div>
+                <div className="container-fluid">
+                   <a className="navbar-brand" href="#">{props.orders}</a>
+                </div>
+                <div className="container-fluid">
+                   <a className="navbar-brand" href="#">{props.products}</a>
+                </div>
+                <div className="container-fluid">
+                   <a className="navbar-brand" href="#">{props.customers}</a>
+                </div>
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="#">{props.account}</a>
+                </div>
+                <div className="container-fluid">
+                   <a className="navbar-brand" href="#">{props.about}</a>
+                </div>
+             </nav>
+          );
+       };
+
+       const Content = props => {
+          return (
+             <div className="content">
+                <div className="now-block text-white bg-success border border-light border-5">
+                   <img src={props.nowIMG} className="now border border-success border-5 m-1" width="350px" alt="now"/>
+                   <div className="p-3">
+                      <h4 className="m-3">{props.nowTitle}</h4>
+                      <p>{props.nowText}</p>
+                      <p>{props.nowOtherText}</p>
+                   </div>
+                </div>
+
+                <div className="online-block text-white bg-success border border-light border-5">
+                   <div className="p-3">
+                       <h4 className="m-3">{props.onlineTitle}</h4>
+                       <p>{props.onlineText}</p>
+                       <div>
+                          <ul>
+                             <li>{props.dostup}</li>
+                             <li>{props.dedline}</li>
+                          </ul>
+                       </div>
+                   </div>
+                   <img src={props.onlineIMG} className="online border border-success border-5 m-1" width="350px" alt="online"/>
+                </div>
+             </div>
+          );
+       };
+
+       const Footer = props => {
+          return (
+             <footer className="text-center bg-success">
+                <div className="container text-uppercase mt-2 pt-4">
+                    <p>{props.footerText}</p>
+                </div>
+             </footer>
+          );
+       };
+
+       const app = (
+          <React.Fragment>
+             <Header
+                homeLink={"#"}
+                logoIMG="https://crm-new.attractor-school.com/assets/attractor-logo.png"
+                login="Login"
+                signUp="Sign Up"
+             />
+             <div className="main-block">
+                <Sidebar
+                    home="home"
+                    dashboard="dashboard"
+                    customers="customers"
+                    orders="orders"
+                    products="products"
+                    account="account"
+                    about="about"
+                />
+                <Content
+                    nowIMG="image/now2.png"
+                    nowTitle="Учись сейчас"
+                    nowText="Многие курсы предоставляют доступы к учебным материалам и казалось бы это круто, НО.
+                         Мало кто может предоставить качественную обратную связь. Самостоятельное изучение программирования с
+                         нуля часто малоэффективно. Когда у человека появляются вопросы, на которые даже гугл не может ответить однозначно,
+                         начинается паника.
+                         Наши преподаватели всегда на связи и ответят на любой вопрос, подскажут как быть и направят куда следует. Поддержка, наравне с
+                         практикой, является залогом успеха — в обучении с нуля в особенности."
+                    nowOtherText="Конечно, ты можешь попробовать и научиться... или потерять драгоценное время. Подумай, ведь уже через 3 месяца обучения на курсе
+                         JavaScript ты сможешь подрабатывать, а еще через год будешь специалистом, готовым к работе в крутой IT-компании.
+                         Не теряй время - учись сейчас!😉"
+                    onlineTitle="БОЖЕ ХРАНИ ОНЛАЙН"
+                    onlineText="У некоторых ребят, которые хотят учиться в Аттракторе, нет
+                    возможности посещать наши курсы очно, несмотря на то что занятия проходят в вечернее время.
+                    В таких случаях мы предлагаем так называемое «заочное обучение», то есть онлайн."
+                    dostup="Все материалы курса, включая пакет нужных приложений будет у вас в доступе 24/7"
+                    dedline="Несмотря на свободное посещение у вас будут дедлайны на домашние работы, без них бы обучение затянулось на месяцы, а то и годы"
+                    onlineIMG="image/online.png"
+                />
+             </div>
+             <Footer
+                footerText={"attractor-it-school"}
+             />
+          </React.Fragment>
+       );
+
+       const container = document.getElementById('app');
+       ReactDOM.createRoot(container).render(app);
+    </script>
+
+</body>
+</html>
